@@ -1,3 +1,4 @@
+# Started on 28-01-2017
 # Definitions
 MK_DIR=		./mk/
 
@@ -6,11 +7,14 @@ include $(MK_DIR)colors.mk $(MK_DIR)local_defs.mk $(MK_DIR)defs.mk
 VPATH=		$(KERNEL_DIR)
 
 # Sources
-ARCH_FILES:=
+ARCH_FILES:=	$(addprefix ./arch/x86/,	\
+		gdt.s				\
+		gdt.c				\
+		)
 
-BOOT_FILES:=	$(addprefix ./boot/,	\
-		boot.s			\
-		kmain.c			\
+BOOT_FILES:=	$(addprefix ./boot/,		\
+		boot.s				\
+		kmain.c				\
 		)
 
 DISPLAY_FILES:=

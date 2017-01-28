@@ -5,10 +5,15 @@
 
 void halt()
 {
-  __asm__("hlt");
+  __asm__("hlt;");
 }
 
-uint32_t kmain(t_boot_info *info, uint32_t eax)
+uint8_t kmain_init()
+{
+  /* Init gdt */
+}
+
+void kmain(mboot_info_t *info, uint32_t eax)
 {
   if (eax != MBOOT_MAGIC2)
     return (1);
@@ -19,5 +24,4 @@ uint32_t kmain(t_boot_info *info, uint32_t eax)
     {
       halt();
     }
-  return (0);
 }
