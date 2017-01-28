@@ -25,10 +25,4 @@ SRC:= 		$(ARCH_FILES) $(BOOT_FILES) $(DISPLAY_FILES) $(DRIVERS_FILES) $(MEM_FILE
 # Rules
 include $(MK_DIR)rules.mk
 
-build:	$(NAME)
-	@$(ISO) $(ISOFLAGS) && $(ECHO) "$(CLEAR)[ $(GREEN)OK$(CLEAR) ] Built\t$(WHITE)$(OS)\n" || "$(CLEAR)[ $(RED)KO$(CLEAR) ] Built\t$(WHITE)$(OS)\n"
-
-run:
-	$(EMU) $(OS)
-
 .PHONY:	all clean fclean re run build
