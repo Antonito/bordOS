@@ -43,4 +43,10 @@ clean:
 # Calls fclean and all
 re:		fclean all
 
-.PHONY: all clean fclean re run
+build:	$(NAME)
+	@$(ISO) $(ISOFLAGS) && $(OK_BUILD) || $(KO_BUILD)
+
+run:
+	$(EMU) $(OS)
+
+.PHONY: all clean fclean re run build

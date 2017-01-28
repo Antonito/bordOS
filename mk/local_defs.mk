@@ -21,7 +21,7 @@ ISOFLAGS=		--output=$(OS) $(ISO_DIR)
 
 # Usual Definitions for Makefile
 NAME=			$(ISO_DIR)kernel.elf
-MODE=
+MODE=			kernel
 DEBUG=			no
 
 ## ASM ##

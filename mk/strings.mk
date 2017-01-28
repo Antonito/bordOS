@@ -21,6 +21,10 @@ RM_BIN:=	$(ECHO) "$(WHITE)[$(YELLOW)RM$(WHITE)] Removed $(CYAN)"$(NAME)$(END_LIN
 NO_TEST:=	$(ECHO) "$(WHITE)No test available."$(END_LINE)
 NO_BENCH:=	$(ECHO) "$(WHITE)No benchmark available."$(END_LINE)
 
+## Build ##
+OK_BUILD:=	$(ECHO) "$(WHITE)[ $(RED)KO$(WHITE) ] Built\t$(CYAN)$(OS)"$(END_LINE)
+KO_BUILD:=	$(ECHO) "$(WHITE)[ $(RED)KO$(WHITE) ] Built\t$(CYAN)$(OS)"$(END_LINE)
+
 ### Infos messages ###
 INFO_SEP:=	"$(WHITE)----------\n"
 
