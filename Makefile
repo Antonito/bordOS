@@ -10,6 +10,7 @@ ARCH_FILES:=
 
 BOOT_FILES:=	$(addprefix ./boot/,	\
 		boot.s			\
+		kmain.c			\
 		)
 
 DISPLAY_FILES:=

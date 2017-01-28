@@ -15,7 +15,7 @@ STAGE2=			$(ISO_BOOT_DIR)/grb/stage2_eltorito
 LINK_SCRIPT=		$(KERNEL_DIR)/link.ld
 
 # Start virtual machine with 512MB of RAM
-EMUFLAGS=		$(OS) -m 512M
+EMUFLAGS=		$(OS) -m 512M -s
 
 ISOFLAGS=		--output=$(OS) $(ISO_DIR)
 
