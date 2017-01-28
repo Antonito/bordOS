@@ -14,6 +14,7 @@ ARCH_FILES:=	$(addprefix ./arch/x86/,	\
 
 BOOT_FILES:=	$(addprefix ./boot/,		\
 		boot.s				\
+		kmain.c				\
 		)
 
 DISPLAY_FILES:=
