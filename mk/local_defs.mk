@@ -29,7 +29,7 @@ DEBUG=			no
 ASM_LOCAL_COMP_FLAGS=
 
 ## C ###
-C_LOCAL_COMP_FLAGS=	-I$(KERNEL_DIR)/include/	\
+C_LOCAL_COMP_FLAGS=	-I$(KERNEL_DIR)		\
 			-I/usr/include/
 
 ### C++ ###
