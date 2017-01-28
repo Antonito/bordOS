@@ -22,7 +22,7 @@ NO_TEST:=	$(ECHO) "$(WHITE)No test available."$(END_LINE)
 NO_BENCH:=	$(ECHO) "$(WHITE)No benchmark available."$(END_LINE)
 
 ## Build ##
-OK_BUILD:=	$(ECHO) "$(WHITE)[ $(RED)KO$(WHITE) ] Built\t$(CYAN)$(OS)"$(END_LINE)
+OK_BUILD:=	$(ECHO) "$(WHITE)[ $(GREEN)OK$(WHITE) ] Built\t$(CYAN)$(OS)"$(END_LINE)
 KO_BUILD:=	$(ECHO) "$(WHITE)[ $(RED)KO$(WHITE) ] Built\t$(CYAN)$(OS)"$(END_LINE)
 
 ### Infos messages ###

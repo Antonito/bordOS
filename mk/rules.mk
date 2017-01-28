@@ -44,8 +44,7 @@ clean:
 re:		fclean all
 
 build:	$(NAME)
-	@$(ISO) $(ISOFLAGS)
-	@$(OK_BUILD)
+	@$(ISO) $(ISOFLAGS) && $(OK_BUILD) || $(KO_BUILD)
 
 run:
 	$(EMU) $(EMUFLAGS)
