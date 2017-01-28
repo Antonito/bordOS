@@ -1,5 +1,5 @@
 # BordOS specific definitions
-EMU=			qemu-system-i686
+EMU=			qemu-system-i386
 ISO=			grub-mkrescue
 
 BUILD_DIR=		./build/
