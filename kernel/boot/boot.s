@@ -4,6 +4,7 @@
 
 	global			start
 	;extern			kmain, code, bss, data, end
+	extern			kmain
 
 	;; Informations relatives au boot
 
@@ -49,19 +50,17 @@ start:
 _kernel_start:
 	mov	eax, 42
 	;; On set la stack
-	;mov	esp, boot_stack
-	;mov	ebp, boot_stack
+	mov	esp, boot_stack
+	mov	ebp, boot_stack
 
 	;; On push le magic number
-	;push	eax
+	push	eax
 
 	;; On push les infos de boot
-;	add	ebx, KERNEL_OFFSET
-	;push	ebx
+	add	ebx, KERNEL_OFFSET
+	push	ebx
 
 	;; On lance le kernel C
-	;mov	ecx, kmain
-	;call	ecx
-loop:
+	mov	ecx, kmain
+	call	ecx
 	hlt
-	jmp	loop
