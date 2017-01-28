@@ -48,7 +48,6 @@ MultiBootHeader:
 start:
 	cli
 _kernel_start:
-	mov	eax, 42
 	;; On set la stack
 	mov	esp, boot_stack
 	mov	ebp, boot_stack

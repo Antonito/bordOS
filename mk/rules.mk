@@ -44,9 +44,13 @@ clean:
 re:		fclean all
 
 build:	$(NAME)
-	@$(ISO) $(ISOFLAGS) && $(OK_BUILD) || $(KO_BUILD)
+	@$(ISO) $(ISOFLAGS)
+	@$(OK_BUILD)
 
 run:
-	$(EMU) $(OS)
+	$(EMU) $(EMUFLAGS)
+
+debug:
+	$(EMU) $(EMUFLAGSDBG)
 
 .PHONY: all clean fclean re run build
