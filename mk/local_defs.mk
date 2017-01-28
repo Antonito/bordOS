@@ -16,6 +16,7 @@ LINK_SCRIPT=		$(KERNEL_DIR)/link.ld
 
 # Start virtual machine with 512MB of RAM
 EMUFLAGS=		$(OS) -m 512M
+EMUFLAGSDBG=		-s -S
 
 ISOFLAGS=		--output=$(OS) $(ISO_DIR)
 
