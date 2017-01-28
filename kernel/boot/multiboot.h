@@ -24,7 +24,12 @@
 
 #define MBOOT_MEM_FLAG_FREE 0x1
 
-typedef struct s_boot_info
+typedef struct s_mboot_info      mboot_info_t;
+typedef struct s_mboot_mod       mboot_mod_t;
+typedef struct s_mboot_map_entry mboot_map_entry_t;
+typedef struct s_mboot_memmap    mboot_memmap_t;
+
+struct s_mboot_info
 {
   uint32_t flags;
   uint32_t mem_lower;
@@ -73,17 +78,17 @@ typedef struct s_boot_info
       uint8_t framebuffer_blue_mask_size;
     };
   };
-} t_boot_info;
+};
 
-typedef struct s_boot_mod
+__attribute__((packed)) struct s_mboot_mod
 {
   uint32_t mod_start;
   uint32_t mod_end;
   uint8_t  string[4];
   uint32_t reserved;
-} __attribute__((packed)) t_boot_mod;
+};
 
-typedef struct s_boot_map_entry
+__attribute__((packed)) struct s_mboot_map_entry
 {
   uint32_t size;
   uint32_t base_addr_lower;
@@ -91,14 +96,14 @@ typedef struct s_boot_map_entry
   uint32_t length_lower;
   uint32_t length_upper;
   uint32_t type;
-} __attribute__((packed)) t_boot_map_entry;
+};
 
-typedef struct
+__attribute__((packed)) struct s_mboot_memmap
 {
   uint32_t size;
   uint64_t base_addr;
   uint64_t length;
   uint32_t type;
-} __attribute__((packed)) mboot_memmap_t;
+};
 
 #endif /* !MULTIBOOT_H_ */
