@@ -1,6 +1,8 @@
 #ifndef IRQ_H_
 #define IRQ_H_
 
+#include "arch/x86/isr.h"
+
 /* ASM functions */
 extern void _irq0();
 extern void _irq1();
@@ -20,5 +22,6 @@ extern void _irq14();
 extern void _irq15();
 
 void init_irq(void);
+void irq_set_routine(int32_t irq, void (*handler)(regs_t *reg));
 
 #endif /* !IRQ_H_ */

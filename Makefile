@@ -28,7 +28,7 @@ BOOT_FILES:=	$(addprefix ./boot/,		\
 		)
 
 DISPLAY_FILES:= $(addprefix ./display/,		\
-		kernel_display.c		\
+		vga_term.c		\
 		)
 
 LIB_FILES:=	$(addprefix ./lib/,		\
@@ -40,6 +40,7 @@ LIB_FILES:=	$(addprefix ./lib/,		\
 
 DRIVERS_FILES:=	$(addprefix ./drivers/,		\
 		serial.c			\
+		keyboard/keyboard.c		\
 		)
 
 MEM_FILES:=

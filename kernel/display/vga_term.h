@@ -1,6 +1,9 @@
 #ifndef KERNEL_DISPLAY_H_
 #define KERNEL_DISPLAY_H_
 
+#include <stdint.h>
+#include <stddef.h>
+
 enum vga_color
 {
   VGA_COLOR_BLACK = 0,
@@ -21,21 +24,11 @@ enum vga_color
   VGA_COLOR_WHITE = 15,
 };
 
-#define VGA_HEIGHT 25
-#define VGA_WIDTH 80
-
-typedef struct termdisp_s
-{
-  uint8_t   term_color;
-  uint16_t *term_buff;
-  size_t    term_x;
-  size_t    term_y;
-} termdisp_t;
-
-uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg);
 void term_init();
 void set_term_color(uint8_t color);
 void term_putchar(uint8_t c);
 void term_putstr(const char *str);
+
+#define VGA_SET_COLORS(fg, bg) (fg | bg << 4)
 
 #endif
