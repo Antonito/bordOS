@@ -1,21 +1,27 @@
+#include "arch/arch.h"
 #include "multiboot.h"
-
-void halt()
-{
-  __asm__("hlt;");
-}
 
 uint8_t kmain_init()
 {
   /* Init gdt */
+  init_gdt();
+  init_idt();
+  init_irq();
+  set_interrupts();
+  return (0);
 }
 
 void kmain(mboot_info_t *info, uint32_t eax)
 {
   if (eax != MBOOT_MAGIC2)
-    return;
+    {
+      return;
+    }
 
-  asm("sti;");
+  if (kmain_init())
+    {
+      return;
+    }
   for (;;)
     {
       halt();

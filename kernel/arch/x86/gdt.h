@@ -25,8 +25,6 @@ __attribute__((packed)) struct s_gdt_reg
   uint32_t base;
 };
 
-void        init_gdt(void);
-extern void gdt_set_gate(int32_t num, uint64_t base, uint64_t limit,
-                         uint8_t access, uint8_t gran);
+void init_gdt(void);
 
 #endif /* !GDT_H_ */

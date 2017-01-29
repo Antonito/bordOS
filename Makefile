@@ -10,6 +10,16 @@ VPATH=		$(KERNEL_DIR)
 ARCH_FILES:=	$(addprefix ./arch/x86/,	\
 		gdt.s				\
 		gdt.c				\
+		idt.s				\
+		idt.c				\
+		isr.s				\
+		isr.c				\
+		irq.c				\
+		irq.s				\
+		halt.s				\
+		interrupts.s			\
+		in.s				\
+		out.s				\
 		)
 
 BOOT_FILES:=	$(addprefix ./boot/,		\
