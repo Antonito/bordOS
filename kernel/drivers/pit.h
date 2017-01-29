@@ -4,6 +4,6 @@
 #include <stdint.h>
 
 void init_timer();
-void beep();
+void beep(uint32_t hz);
 
 #endif /* !PIT_H_ */

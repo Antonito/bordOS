@@ -66,9 +66,9 @@ static void pit_play_sound(uint32_t nFrequence)
     }
 }
 
-void beep()
+void beep(uint32_t hz)
 {
-  pit_play_sound(1000);
+  pit_play_sound(hz);
   pit_wait(10);
   pit_no_sound();
   logger_write("Beeped !\n");

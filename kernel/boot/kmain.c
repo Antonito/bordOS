@@ -41,7 +41,9 @@ void kmain(mboot_info_t *info, uint32_t eax)
   set_term_color(VGA_SET_COLORS(VGA_COLOR_RED, VGA_COLOR_BLACK));
   term_putstr("Kernel!");
   set_term_color(VGA_SET_COLORS(VGA_COLOR_WHITE, VGA_COLOR_BLACK));
-  beep();
+  // beep(1000);
+  // beep(10000);
+  // beep(500);
   for (;;)
     {
       halt();
