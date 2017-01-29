@@ -3,13 +3,10 @@
 #include "boot/multiboot.h"
 #include "display/vga_term.h"
 #include "drivers/keyboard/keyboard.h"
+#include "drivers/pit.h"
 
 #include "logger.h"
 
-/*
-** TODO:
-** Each module should take care of the logging, instead of writting it here
-*/
 uint8_t kmain_init()
 {
   init_logger(SERIAL_COM1);
@@ -19,8 +16,9 @@ uint8_t kmain_init()
   init_irq();
   set_interrupts();
   logger_write("Interrupts activated\n");
+
+  init_timer();
   init_keyboard();
-  logger_write("Keyboard inited\n");
   return (0);
 }
 
@@ -43,7 +41,10 @@ void kmain(mboot_info_t *info, uint32_t eax)
   set_term_color(VGA_SET_COLORS(VGA_COLOR_RED, VGA_COLOR_BLACK));
   term_putstr("Kernel!");
   set_term_color(VGA_SET_COLORS(VGA_COLOR_WHITE, VGA_COLOR_BLACK));
-
+  beep();
+  for (uint32_t i = 0; i < (uint32_t)~1; ++i)
+    ;
+  beep();
   for (;;)
     {
       halt();

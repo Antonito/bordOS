@@ -1,8 +1,7 @@
 #include <stdint.h>
 #include "display/vga_term.h"
 #include "arch/arch.h"
-#include "arch/x86/irq.h"
-#include "arch/x86/isr.h"
+#include "logger.h"
 
 uint8_t chars[] = {'\b', 0,   'q', 'w',  'e', 'r', 't', 'y', 'u', 'i', 'o',
                    'p',  0,   0,   '\n', 0,   'a', 's', 'd', 'f', 'g', 'h',
@@ -27,4 +26,5 @@ void keyboard_handler(regs_t *reg)
 void init_keyboard(void)
 {
   irq_set_routine(1, keyboard_handler);
+  logger_write("Keyboard inited\n");
 }

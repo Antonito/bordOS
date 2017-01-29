@@ -2,8 +2,9 @@
 #include "lib/lib.h"
 #include "logger.h"
 
-void system_abort(const char *const msg, const char *const file,
-                  const char *const line)
+__attribute__((noreturn)) void system_abort(const char *const msg,
+                                            const char *const file,
+                                            const char *const line)
 {
   (void)msg, (void)file, (void)line;
   clear_interrupts();

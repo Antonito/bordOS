@@ -42,6 +42,7 @@ LIB_FILES:=	$(addprefix ./lib/,		\
 DRIVERS_FILES:=	$(addprefix ./drivers/,		\
 		serial.c			\
 		keyboard/keyboard.c		\
+		pit.c				\
 		)
 
 MEM_FILES:=
