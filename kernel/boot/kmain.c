@@ -3,16 +3,26 @@
 #include "boot/multiboot.h"
 #include "display/kernel_display.h"
 
-#include "drivers/serial.h"
+#include "logger.h"
 
+/*
+** TODO:
+** Each module should take care of the logging, instead of writting it here
+*/
 uint8_t kmain_init()
 {
-  /* Init gdt */
+  init_logger(SERIAL_COM1);
+  logger_write("Logger inited\n");
   term_init();
+  logger_write("Term inited\n");
   init_gdt();
+  logger_write("GDT installed\n");
   init_idt();
+  logger_write("IDT installed\n");
   init_irq();
+  logger_write("IRQs and ISRs installed\n");
   set_interrupts();
+  logger_write("Interrupts activated\n");
   return (0);
 }
 
