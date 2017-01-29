@@ -6,7 +6,7 @@ gdt_reg_t  kgdtr;         /* GDT Register */
 /* ASM function */
 extern void gdt_flush(void);
 
-void gdt_set_gate(int32_t num, unsigned long base, unsigned long limit,
+static void gdt_set_gate(int32_t num, unsigned long base, unsigned long limit,
                          uint8_t access, uint8_t gran)
 {
   /* Set bases */

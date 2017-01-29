@@ -20,7 +20,7 @@ void idt_set_gate(uint8_t num, uint64_t base, uint16_t sel, uint8_t flags)
   kidt[num].flags = flags;
 }
 
-extern void init_idt(void)
+void init_idt(void)
 {
   /* Register */
   kidtr.limit = (sizeof(idt_reg_t) * 0xFF) - 1;

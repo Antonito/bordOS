@@ -38,7 +38,9 @@ LIB_FILES:=	$(addprefix ./lib/,		\
 		memset.c			\
 		)
 
-DRIVERS_FILES:=
+DRIVERS_FILES:=	$(addprefix ./drivers/,		\
+		serial.c			\
+		)
 
 MEM_FILES:=
 

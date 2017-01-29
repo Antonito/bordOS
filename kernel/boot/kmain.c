@@ -3,17 +3,15 @@
 #include "boot/multiboot.h"
 #include "display/kernel_display.h"
 
+#include "drivers/serial.h"
+
 uint8_t kmain_init()
 {
   /* Init gdt */
   term_init();
-  term_putstr("Init term");
   init_gdt();
-  term_putstr(" | Init gdt.");
   init_idt();
-  term_putstr(" | Init idt.");
   init_irq();
-  term_putstr(" | Init irq.");
   set_interrupts();
   return (0);
 }
