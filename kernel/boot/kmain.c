@@ -27,7 +27,7 @@ void kmain(mboot_info_t *info, uint32_t eax)
     {
       return;
     }
-
+  (void)info;
   if (kmain_init())
     {
       return;

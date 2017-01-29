@@ -9,7 +9,8 @@ idt_reg_t  kidtr; /* IDT Register */
 /* ASM function */
 extern void idt_load(void);
 
-void idt_set_gate(uint8_t num, uint64_t base, uint16_t sel, uint8_t flags)
+void idt_set_gate(const uint8_t num, const uint64_t base, const uint16_t sel,
+                  const uint8_t flags)
 {
   /* Base */
   kidt[num].base_low = base & 0xFFFF;

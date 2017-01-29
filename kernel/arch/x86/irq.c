@@ -9,7 +9,7 @@
 */
 void *irq_routines[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-void irq_set_routine(int32_t irq, void (*handler)(regs_t *reg))
+void irq_set_routine(const int32_t irq, void (*handler)(regs_t *reg))
 {
   irq_routines[irq] = handler;
 }

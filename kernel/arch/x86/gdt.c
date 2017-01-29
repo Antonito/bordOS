@@ -1,14 +1,15 @@
 #include "arch/x86/gdt.h"
 #include "logger.h"
 
-gdt_desc_t kgdt[GDTSIZE]; /* GDT */
-gdt_reg_t  kgdtr;         /* GDT Register */
+static gdt_desc_t kgdt[GDTSIZE]; /* GDT */
+gdt_reg_t         kgdtr;         /* GDT Register */
 
 /* ASM function */
 extern void gdt_flush(void);
 
-static void gdt_set_gate(int32_t num, unsigned long base, unsigned long limit,
-                         uint8_t access, uint8_t gran)
+static void gdt_set_gate(const int32_t num, const uint64_t base,
+                         const uint64_t limit, const uint8_t access,
+                         const uint8_t gran)
 {
   /* Set bases */
   kgdt[num].base_low = base & 0xFFFF;
