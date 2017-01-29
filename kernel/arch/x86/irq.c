@@ -2,13 +2,14 @@
 #include "arch/x86/irq.h"
 #include "arch/x86/isr.h"
 #include "arch/x86/idt.h"
+#include "logger.h"
 
 /*
 ** Routines
 */
 void *irq_routines[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-void irq_set_routine(int32_t irq, void (*handler)(regs_t *reg))
+void irq_set_routine(const int32_t irq, void (*handler)(regs_t *reg))
 {
   irq_routines[irq] = handler;
 }
@@ -54,6 +55,7 @@ void init_irq(void)
   idt_set_gate(45, (unsigned)_irq13, 0x08, 0x8E);
   idt_set_gate(46, (unsigned)_irq14, 0x08, 0x8E);
   idt_set_gate(47, (unsigned)_irq15, 0x08, 0x8E);
+  logger_write("IRQs installed\n");
 }
 
 void irq_handler(regs_t *reg)

@@ -13,15 +13,10 @@
 uint8_t kmain_init()
 {
   init_logger(SERIAL_COM1);
-  logger_write("Logger inited\n");
   term_init();
-  logger_write("Term inited\n");
   init_gdt();
-  logger_write("GDT installed\n");
   init_idt();
-  logger_write("IDT installed\n");
   init_irq();
-  logger_write("IRQs and ISRs installed\n");
   set_interrupts();
   logger_write("Interrupts activated\n");
   init_keyboard();
@@ -35,7 +30,7 @@ void kmain(mboot_info_t *info, uint32_t eax)
     {
       return;
     }
-
+  (void)info;
   if (kmain_init())
     {
       return;

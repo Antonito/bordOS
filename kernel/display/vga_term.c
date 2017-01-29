@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include "lib/lib.h"
 #include "display/vga_term.h"
+#include "logger.h"
 
 #define VGA_HEIGHT 25
 #define VGA_WIDTH 80
@@ -32,6 +33,7 @@ void term_init()
 	  disp.term_buff[i] = VGA_ENTRY(' ', disp.term_color);
 	}
     }
+  logger_write("Terminal inited\n");
 }
 
 void set_term_color(uint8_t color)

@@ -27,6 +27,7 @@ struct __attribute__((packed)) s_idt_reg
 
 /* IDTs */
 void init_idt(void);
-void idt_set_gate(uint8_t num, uint64_t base, uint16_t sel, uint8_t flags);
+void idt_set_gate(const uint8_t num, const uint64_t base, const uint16_t sel,
+                  const uint8_t flags);
 
 #endif /* !IDT_H_ */

@@ -1,6 +1,7 @@
 #include "arch/x86/idt.h"
 #include "arch/x86/isr.h"
 #include "lib/lib.h" /* memset */
+#include "logger.h"
 
 idt_desc_t kidt[IDTSIZE];
 idt_reg_t  kidtr; /* IDT Register */
@@ -8,7 +9,8 @@ idt_reg_t  kidtr; /* IDT Register */
 /* ASM function */
 extern void idt_load(void);
 
-void idt_set_gate(uint8_t num, uint64_t base, uint16_t sel, uint8_t flags)
+void idt_set_gate(const uint8_t num, const uint64_t base, const uint16_t sel,
+                  const uint8_t flags)
 {
   /* Base */
   kidt[num].base_low = base & 0xFFFF;
@@ -65,4 +67,5 @@ void init_idt(void)
 
   /* Actually install idt */
   idt_load();
+  logger_write("IDT and ISRs installed\n");
 }
