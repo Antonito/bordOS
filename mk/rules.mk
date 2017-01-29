@@ -50,6 +50,6 @@ run:
 	$(EMU) $(EMUFLAGS)
 
 debug:
-	$(EMU) $(EMUFLAGSDBG)
+	$(EMU) $(EMUFLAGS) $(EMUFLAGSDBG)
 
 .PHONY: all clean fclean re run build

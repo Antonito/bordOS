@@ -80,7 +80,7 @@ struct s_mboot_info
   };
 };
 
-__attribute__((packed)) struct s_mboot_mod
+struct __attribute__((packed)) s_mboot_mod
 {
   uint32_t mod_start;
   uint32_t mod_end;
@@ -88,7 +88,7 @@ __attribute__((packed)) struct s_mboot_mod
   uint32_t reserved;
 };
 
-__attribute__((packed)) struct s_mboot_map_entry
+struct __attribute__((packed)) s_mboot_map_entry
 {
   uint32_t size;
   uint32_t base_addr_lower;
@@ -98,7 +98,7 @@ __attribute__((packed)) struct s_mboot_map_entry
   uint32_t type;
 };
 
-__attribute__((packed)) struct s_mboot_memmap
+struct __attribute__((packed)) s_mboot_memmap
 {
   uint32_t size;
   uint64_t base_addr;

@@ -2,11 +2,11 @@
 	section .text
 
 	global	gdt_flush
-	extern	kgdt
+	extern	kgdtr
 
 ;; Loads the GDT table
 gdt_flush:
-	lgdt	[kgdt]
+	lgdt		[kgdtr]
 	mov		ax, 0x10
 	mov		ds, ax
 	mov		es, ax

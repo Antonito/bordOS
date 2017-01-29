@@ -3,8 +3,7 @@
 	;; On rend les points d'entrees visibles
 
 	global			start
-	;extern			kmain, code, bss, data, end
-	extern			kmain
+	extern			kmain, code, bss, data, end
 
 	;; Informations relatives au boot
 
@@ -15,7 +14,7 @@
 	MULTIBOOT_PAGE_ALIGN	equ 1 << 0
 	MULTIBOOT_MEMORY_INFO	equ 1 << 1
 	MULTIBOOT_HEADER_MAGIC	equ 0x1BADB002
-	MULTIBOOT_HEADER_FLAGS	equ (MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO)
+	MULTIBOOT_HEADER_FLAGS	equ MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO
 	MULTIBOOT_CHECKSUM	equ -(MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)
 
 	%macro SetSegments 2
@@ -41,9 +40,9 @@ MultiBootHeader:
 	dd	MULTIBOOT_HEADER_FLAGS
 	dd	MULTIBOOT_CHECKSUM
 	;;  On set la resolution
-	;dd	code
-	;dd	bss
-	;dd	end
+	dd	code
+	dd	bss
+	dd	end
 	dd	start
 start:
 	cli
@@ -60,6 +59,7 @@ _kernel_start:
 	push	ebx
 
 	;; On lance le kernel C
+	cli
 	mov	ecx, kmain
 	call	ecx
 	hlt

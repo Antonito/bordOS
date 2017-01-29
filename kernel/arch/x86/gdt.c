@@ -6,7 +6,7 @@ gdt_reg_t  kgdtr;         /* GDT Register */
 /* ASM function */
 extern void gdt_flush(void);
 
-static void gdt_set_gate(int32_t num, unsigned long base, unsigned long limit,
+void gdt_set_gate(int32_t num, unsigned long base, unsigned long limit,
                          uint8_t access, uint8_t gran)
 {
   /* Set bases */
@@ -23,7 +23,7 @@ static void gdt_set_gate(int32_t num, unsigned long base, unsigned long limit,
   kgdt[num].access = access;
 }
 
-extern void init_gdt(void)
+void init_gdt(void)
 {
   /* Register */
   kgdtr.limit = (sizeof(gdt_desc_t) * 3) - 1;

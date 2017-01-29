@@ -3,12 +3,11 @@
 #include "boot/multiboot.h"
 #include "display/kernel_display.h"
 
-static uint8_t kmain_init()
+uint8_t kmain_init()
 {
   /* Init gdt */
   term_init();
   term_putstr("Init term");
-#if 0
   init_gdt();
   term_putstr(" | Init gdt.");
   init_idt();
@@ -16,7 +15,6 @@ static uint8_t kmain_init()
   init_irq();
   term_putstr(" | Init irq.");
   set_interrupts();
-#endif
   return (0);
 }
 
