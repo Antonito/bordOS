@@ -42,3 +42,6 @@ vgcore.*
 
 # IDE Directories
 .vscode/
+
+# gdb
+.gdb_history
