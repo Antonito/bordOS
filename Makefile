@@ -27,7 +27,16 @@ BOOT_FILES:=	$(addprefix ./boot/,		\
 		kmain.c				\
 		)
 
-DISPLAY_FILES:=
+DISPLAY_FILES:= $(addprefix ./display/,		\
+		kernel_display.c		\
+		)
+
+LIB_FILES:=	$(addprefix ./lib/,		\
+		strlen.c			\
+		memcmp.c			\
+		memcpy.c			\
+		memset.c			\
+		)
 
 DRIVERS_FILES:=
 
@@ -35,7 +44,7 @@ MEM_FILES:=
 
 FS_FILES:=
 
-SRC:= 		$(ARCH_FILES) $(BOOT_FILES) $(DISPLAY_FILES) $(DRIVERS_FILES) $(MEM_FILES) $(FS_FILES)
+SRC:= 		$(ARCH_FILES) $(BOOT_FILES) $(DISPLAY_FILES) $(LIB_FILES) $(DRIVERS_FILES) $(MEM_FILES) $(FS_FILES)
 
 # Rules
 include $(MK_DIR)rules.mk

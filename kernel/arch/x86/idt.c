@@ -1,6 +1,6 @@
-#include <string.h>
 #include "arch/x86/idt.h"
 #include "arch/x86/isr.h"
+#include "lib/lib.h" /* memset */
 
 idt_desc_t kidt[IDTSIZE];
 idt_reg_t  kidtr; /* IDT Register */

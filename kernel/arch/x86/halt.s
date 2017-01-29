@@ -5,3 +5,4 @@
 
 halt:
 	hlt
+	ret

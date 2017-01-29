@@ -19,4 +19,6 @@ extern void _irq13();
 extern void _irq14();
 extern void _irq15();
 
+void init_irq(void);
+
 #endif /* !IRQ_H_ */
