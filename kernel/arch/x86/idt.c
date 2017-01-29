@@ -1,6 +1,7 @@
 #include "arch/x86/idt.h"
 #include "arch/x86/isr.h"
 #include "lib/lib.h" /* memset */
+#include "logger.h"
 
 idt_desc_t kidt[IDTSIZE];
 idt_reg_t  kidtr; /* IDT Register */
@@ -65,4 +66,5 @@ void init_idt(void)
 
   /* Actually install idt */
   idt_load();
+  logger_write("IDT and ISRs installed\n");
 }

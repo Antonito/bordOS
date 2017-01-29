@@ -2,11 +2,13 @@
 #include <stddef.h>
 #include "lib/lib.h"
 #include "display/kernel_display.h"
+#include "logger.h"
 
 static termdisp_t disp;
 
 static uint16_t vga_entry(uint8_t uc, uint8_t color)
 {
+
   return ((uint16_t)uc | (uint16_t)color << 8);
 }
 
@@ -30,6 +32,7 @@ void term_init()
 	  disp.term_buff[i] = vga_entry(' ', disp.term_color);
 	}
     }
+  logger_write("Terminal inited\n");
 }
 
 void set_term_color(uint8_t color)
@@ -40,6 +43,7 @@ void set_term_color(uint8_t color)
 void term_putchar(uint8_t c)
 {
   const size_t i = disp.term_y * VGA_WIDTH + disp.term_x;
+
   disp.term_buff[i] = vga_entry(c, disp.term_color);
   if (++disp.term_x == VGA_WIDTH)
     {

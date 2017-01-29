@@ -32,6 +32,7 @@ DISPLAY_FILES:= $(addprefix ./display/,		\
 		)
 
 LIB_FILES:=	$(addprefix ./lib/,		\
+		abort.c				\
 		strlen.c			\
 		memcmp.c			\
 		memcpy.c			\

@@ -1,4 +1,5 @@
 #include "arch/x86/gdt.h"
+#include "logger.h"
 
 gdt_desc_t kgdt[GDTSIZE]; /* GDT */
 gdt_reg_t  kgdtr;         /* GDT Register */
@@ -40,4 +41,5 @@ void init_gdt(void)
 
   /* Actually install gdt */
   gdt_flush();
+  logger_write("GDT installed\n");
 }
