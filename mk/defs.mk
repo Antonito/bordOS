@@ -42,6 +42,9 @@ C_VER:=		gnu99
 CFLAGS+=	-W					\
 		-Wall					\
 		-Wextra					\
+		-Wshadow				\
+		-Wpointer-arith				\
+		-Wfloat-equals				\
 		-std=$(C_VER)				\
 		$(C_LOCAL_COMP_FLAGS)
 

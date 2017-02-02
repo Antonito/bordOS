@@ -128,6 +128,7 @@ static int8_t cmos_get_update()
   return (inb(CMOS_DATA) & 0x80);
 }
 
+// TODO: Code
 #if 0
 void cmos_RTC(cmos_rtc_t *const data)
 {
