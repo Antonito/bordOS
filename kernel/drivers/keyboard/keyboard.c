@@ -1,6 +1,6 @@
 #include <stdint.h>
-#include "display/vga_term.h"
 #include "arch/arch.h"
+#include "display/vga_term.h"
 #include "logger.h"
 
 uint8_t chars[] = {'\b', 0,   'q', 'w',  'e', 'r', 't', 'y', 'u', 'i', 'o',
