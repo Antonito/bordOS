@@ -46,7 +46,9 @@ DRIVERS_FILES:=	$(addprefix ./drivers/,		\
 		pit.c				\
 		)
 
-MEM_FILES:=
+MEM_FILES:=	$(addprefix ./memory/,		\
+		pmm.c				\
+		)
 
 FS_FILES:=
 

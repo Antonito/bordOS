@@ -46,9 +46,16 @@ void logger_write_lvl(const char *const str, const enum LogLevel lvl)
 
 static void logger_write_date(void)
 {
+  static char const *_months[] = {"",     "Jan.", "Fev.", "Mar.", "Apr.",
+                                  "May.", "Jun.", "Jul.", "Aug.", "Sep.",
+                                  "Oct.", "Nov.", "Dec."};
   cmos_rtc_t date;
 
   cmos_RTC(&date);
+  serial_write_nb(logger.port, date.day, 10);
+  serial_write_len(logger.port, " ", 1);
+  serial_write_len(logger.port, _months[date.month], 4);
+  serial_write_len(logger.port, " ", 1);
   serial_write_nb(logger.port, date.hour, 10);
   serial_write_len(logger.port, ":", 1);
   serial_write_nb(logger.port, date.minuts, 10);
