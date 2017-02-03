@@ -1,4 +1,5 @@
 #include "arch/arch.h"
+#include "drivers/cmos.h"
 #include "lib/lib.h"
 
 #define CMOS_REG (0x70)
@@ -100,47 +101,117 @@ enum CMOS_VALUES
   CMOS_RSV13
 };
 
-static void cmos_read(uint8_t _128arr[])
+/* Read a value from CMOS */
+static inline uint8_t cmos_read_raw(uint8_t reg)
+{
+  outb(CMOS_REG, reg);
+  return (inb(CMOS_DATA));
+}
+
+/* Read the whole CMOS */
+void cmos_read(uint8_t _128arr[])
 {
   for (uint8_t i = 0; i < 128; ++i)
     {
       clear_interrupts();
-      outb(CMOS_REG, i);
-      _128arr[i] = inb(CMOS_DATA);
+      _128arr[i] = cmos_read_raw(i);
       set_interrupts();
     }
 }
 
-static void cmos_write(uint8_t _128arr[])
+/* Writes a value to the CMOS */
+static inline void cmos_write_raw(uint8_t reg, uint8_t val)
+{
+  outb(CMOS_REG, reg);
+  outb(CMOS_DATA, val);
+}
+
+/* Completly rewrite the CMOS */
+void cmos_write(uint8_t _128arr[])
 {
   for (uint8_t i = 0; i < 128; ++i)
     {
       clear_interrupts();
-      outb(CMOS_REG, i);
-      outb(CMOS_DATA, _128arr[i]);
+      cmos_write_raw(i, _128arr[i]);
       set_interrupts();
     }
 }
 
 static int8_t cmos_get_update()
 {
-  outb(CMOS_REG, CMOS_STAT_REG_A);
-  return (inb(CMOS_DATA) & 0x80);
+  return (cmos_read_raw(CMOS_STAT_REG_A) & 0x80);
 }
 
-// TODO: Code
-#if 0
-void cmos_RTC(cmos_rtc_t *const data)
+static void __cmos_fill_rtc(cmos_rtc_t *const data)
 {
-  kassert(data && "Should not be null.");
   while (cmos_get_update())
     ;
-  data->century = ;
-  data->seconds = ;
-  data->minuts = ;
-  data->hour = ;
-  data->month = ;
-  data->year = ;
-  data->century = ;
+  data->seconds = cmos_read_raw(CMOS_RTC_SEC);
+  data->minuts = cmos_read_raw(CMOS_RTC_MIN);
+  data->hour = cmos_read_raw(CMOS_RTC_HOUR);
+  data->day = cmos_read_raw(CMOS_RTC_DATE_DAY);
+  data->month = cmos_read_raw(CMOS_RTC_DATE_MONTH);
+  data->year = cmos_read_raw(CMOS_RTC_DATE_YEAR);
+  data->century = 0;
 }
-#endif
+
+#define BCD2BIN(val) ((val & 0x0F) + ((val / 16) * 10))
+
+void cmos_RTC(cmos_rtc_t *const data)
+{
+  cmos_rtc_t last = {0};
+  uint8_t    registerB;
+
+  kassert(data && "Should not be null.");
+  __cmos_fill_rtc(data);
+
+  /* Avoid incosistent values */
+  do
+    {
+      last.seconds = data->seconds;
+      last.minuts = data->minuts;
+      last.hour = data->hour;
+      last.day = data->day;
+      last.month = data->month;
+      last.year = data->year;
+      last.century = data->century;
+      __cmos_fill_rtc(data);
+    }
+  while (last.seconds != data->seconds && last.minuts != data->minuts &&
+         last.hour != data->hour && last.day != data->day &&
+         last.month != data->month && last.year != data->year &&
+         last.century != data->century);
+  registerB = cmos_read_raw(CMOS_STAT_REG_B);
+
+  /* Convert BCD to binary, if needed */
+  if (!(registerB & 0x4))
+    {
+      data->seconds = BCD2BIN(data->seconds);
+      data->minuts = BCD2BIN(data->minuts);
+      data->hour = ((data->hour & 0x0F) + (((data->hour & 0x70) / 16) * 10)) |
+                   (data->hour & 0x80);
+      data->month = BCD2BIN(data->month);
+      data->year = BCD2BIN(data->year);
+      data->century = BCD2BIN(data->century);
+    }
+
+  /* Convert clock to 24h format, if needed */
+  if (!(registerB & 0x02) && (data->hour & 0x80))
+    {
+      data->hour = ((data->hour & 0x7F) + 12) % 24;
+    }
+
+  /* Calculate the 4-digit year */
+  if (data->century != 0) /* In fact, you check the register */
+    {
+      ;
+    }
+  else
+    {
+      data->year += (CURRENT_YEAR / 100) * 100;
+      if (data->year > CURRENT_YEAR)
+	{
+	  data->year += 100;
+	}
+    }
+}

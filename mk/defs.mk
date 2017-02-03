@@ -44,7 +44,7 @@ CFLAGS+=	-W					\
 		-Wextra					\
 		-Wshadow				\
 		-Wpointer-arith				\
-		-Wfloat-equals				\
+		-Wfloat-equal				\
 		-std=$(C_VER)				\
 		$(C_LOCAL_COMP_FLAGS)
 

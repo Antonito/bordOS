@@ -1,3 +1,4 @@
+#include "drivers/cmos.h"
 #include "logger.h"
 
 static const struct
@@ -43,8 +44,22 @@ void logger_write_lvl(const char *const str, const enum LogLevel lvl)
     }
 }
 
+static void logger_write_date(void)
+{
+  cmos_rtc_t date;
+
+  cmos_RTC(&date);
+  serial_write_nb(logger.port, date.hour, 10);
+  serial_write_len(logger.port, ":", 1);
+  serial_write_nb(logger.port, date.minuts, 10);
+  serial_write_len(logger.port, ":", 1);
+  serial_write_nb(logger.port, date.seconds, 10);
+  serial_write_len(logger.port, " ", 1);
+}
+
 void logger_write(const char *const str)
 {
+  logger_write_date();
   serial_write_len(logger.port, _level[logger.level].str,
                    _level[logger.level].len);
   serial_write(logger.port, str);

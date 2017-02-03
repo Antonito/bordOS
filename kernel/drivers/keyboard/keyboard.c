@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "arch/arch.h"
+#include "drivers/pit.h"
 #include "display/vga_term.h"
 #include "logger.h"
 
@@ -17,6 +18,7 @@ void keyboard_handler(regs_t *reg)
   keycode = inb(0x60);
   if (keycode - 0x80 > 0)
     return;
+
   buff[0] = chars[(keycode - 0x0E) % 44];
   term_putstr((const char *)&buff[0]);
   buff[0] = 0;

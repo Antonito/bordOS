@@ -1,4 +1,5 @@
 #include "arch/arch.h"
+#include "lib/lib.h"
 #include "drivers/serial.h"
 
 void serial_init(const uint16_t port)
@@ -19,7 +20,8 @@ static int32_t serial_received(const uint16_t port)
 
 char serial_read(const uint16_t port)
 {
-  while (!serial_received(port));
+  while (!serial_received(port))
+    ;
   return (inb(port));
 }
 
@@ -30,8 +32,22 @@ static int32_t serial_is_transmit_empty(const uint16_t port)
 
 void serial_put(const uint16_t port, const char a)
 {
-  while (!serial_is_transmit_empty(port));
+  while (!serial_is_transmit_empty(port))
+    ;
   outb(port, a);
+}
+
+void serial_write_nb(const uint16_t port, const uint32_t nb,
+                     const uint8_t base)
+{
+  static char const *_base = "0123456789ABCDEF";
+
+  kassert(base <= 16 && "Base should be <= 16");
+  if (nb > base)
+    {
+      serial_write_nb(port, nb / base, base);
+    }
+  serial_put(port, _base[nb % base]);
 }
 
 /* Writes a NUL-terminated string */
@@ -48,12 +64,13 @@ void serial_write(const uint16_t port, const char *const str)
       ++i;
     }
   /* Active wait */
-  while (!serial_is_transmit_empty(port));
+  while (!serial_is_transmit_empty(port))
+    ;
 }
 
 /* Write len characters of the str string */
 void serial_write_len(const uint16_t port, const char *const str,
-                       const size_t len)
+                      const size_t len)
 {
   size_t i;
 
@@ -66,5 +83,6 @@ void serial_write_len(const uint16_t port, const char *const str,
       ++i;
     }
   /* Active wait */
-  while (!serial_is_transmit_empty(port));
+  while (!serial_is_transmit_empty(port))
+    ;
 }

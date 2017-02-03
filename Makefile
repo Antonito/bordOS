@@ -40,6 +40,7 @@ LIB_FILES:=	$(addprefix ./lib/,		\
 		)
 
 DRIVERS_FILES:=	$(addprefix ./drivers/,		\
+		cmos.c				\
 		serial.c			\
 		keyboard/keyboard.c		\
 		pit.c				\
