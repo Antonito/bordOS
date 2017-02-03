@@ -16,5 +16,6 @@ void init_logger(const enum SERIAL_PORT port);
 void logger_set_level(const enum LogLevel lvl);
 void logger_write(const char *const str);
 void logger_write_lvl(const char *const str, const enum LogLevel lvl);
+void logger_writef(const char *const fmt, ...);
 
 #endif /* !LOGGER_H_ */
