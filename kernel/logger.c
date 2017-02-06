@@ -3,6 +3,10 @@
 #include "lib/lib.h"
 #include "logger.h"
 
+static char const *_months[] = {"",     "Jan.", "Fev.", "Mar.", "Apr.",
+                                "May.", "Jun.", "Jul.", "Aug.", "Sep.",
+                                "Oct.", "Nov.", "Dec."};
+
 static const struct
 {
   const char * str;
@@ -103,9 +107,6 @@ static void logger_writef_nodate(const char *const fmt, ...)
 
 static void logger_write_date(void)
 {
-  static char const *_months[] = {"",     "Jan.", "Fev.", "Mar.", "Apr.",
-                                  "May.", "Jun.", "Jul.", "Aug.", "Sep.",
-                                  "Oct.", "Nov.", "Dec."};
   cmos_rtc_t date;
 
   cmos_RTC(&date);
@@ -127,6 +128,8 @@ void logger_writef(const char *const fmt, ...)
 
   logger_write_date();
   va_start(ap, fmt);
+  serial_write_len(logger.port, _level[logger.level].str,
+                   _level[logger.level].len);
   logger_writev(fmt, &ap);
   va_end(ap);
 }

@@ -17,15 +17,6 @@
 	MULTIBOOT_HEADER_FLAGS	equ MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO
 	MULTIBOOT_CHECKSUM	equ -(MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)
 
-	%macro SetSegments 2
-		mov e%2, %1
-		mov ds, %2
-		mov es, %2
-		mov fs, %2
-		mov gs, %2
-		mov ss, %2
-	%endmacro
-
 	section	.bss
 	align	0x8
 	[global	boot_stack]
@@ -39,7 +30,6 @@ MultiBootHeader:
 	dd	MULTIBOOT_HEADER_MAGIC
 	dd	MULTIBOOT_HEADER_FLAGS
 	dd	MULTIBOOT_CHECKSUM
-	;;  On set la resolution
 	dd	code
 	dd	bss
 	dd	end
