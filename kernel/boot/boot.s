@@ -46,6 +46,7 @@ MultiBootHeader:
 	dd	bss
 	dd	end
 	dd	start
+
 start:
 	cli
 	

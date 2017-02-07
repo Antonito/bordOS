@@ -118,8 +118,8 @@ void init_pmm(mboot_info_t const *const mb)
   available_memory_kb = (mb->mem_lower) + (mb->mem_upper);
   pmm_block_total = (available_memory_kb * 1024) / BLOCK_SIZE;
   pmm_block_used = 0;
+  pmm_map = (uint32_t *)&_end;
   pmm_deinit_region(0, available_memory_kb * 1024);
-  pmm_map = (uint32_t *)_end;
   pmm_init_region(_end + pmm_block_total,
                   available_memory_kb * 1024 - _end / 1024);
   logger_writef("We have: %dKB | %dMB of memory\n", available_memory_kb,
