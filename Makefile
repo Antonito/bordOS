@@ -20,6 +20,7 @@ ARCH_FILES:=	$(addprefix ./arch/x86/,	\
 		interrupts.s			\
 		in.s				\
 		out.s				\
+		paging.s			\
 		)
 
 BOOT_FILES:=	$(addprefix ./boot/,		\

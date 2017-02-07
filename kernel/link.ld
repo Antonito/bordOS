@@ -1,7 +1,7 @@
 OUTPUT_FORMAT("elf32-i386")
 ENTRY(start)
 phys = 0x00100000;
-offset = 0x00000000;
+offset = 0xC0000000;
 virt = phys + offset;
 SECTIONS {
 	. = virt;

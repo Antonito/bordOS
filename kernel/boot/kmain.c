@@ -16,7 +16,7 @@ uint8_t kmain_init(mboot_info_t const *const info)
   init_irq();
   set_interrupts();
   logger_write("Interrupts activated\n");
-  init_pmm(info);
+  // init_pmm(info);
   init_timer();
   init_keyboard();
   return (0);
